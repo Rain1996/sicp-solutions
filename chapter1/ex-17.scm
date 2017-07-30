@@ -1,4 +1,4 @@
-(define (double n) (+ n n))
+(define (double n) (* n 2))
 (define (halve n) (/ n 2))
 (define (is_even n) (= (remainder n 2) 0))
 
