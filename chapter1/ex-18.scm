@@ -1,5 +1,4 @@
-(define (double n) (* n 2))
-(define (halve n) (/ n 2))
+; double, halve 在mit-scheme中已有定义
 (define (is_even n) (= (remainder n 2) 0))
 
 (define (fast_product a b)
