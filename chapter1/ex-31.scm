@@ -6,11 +6,11 @@
 
 ;Iterative implementation
 (define (product term a next b)
-    (define (iter term a next result)
+    (define (iter a result)
         (if (> a b)
             result
-            (iter term (next a) next (* (term a) result))))
-    (iter term a next 1))
+            (iter (next a) (* (term a) result))))
+    (iter a 1))
 
 
 (define (factorial n)
