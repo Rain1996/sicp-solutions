@@ -4,7 +4,7 @@
         1 
         (* (term a) (product term (next a) next b))))
 
-;Iterative implementation
+; Iterative implementation
 (define (product term a next b)
     (define (iter a result)
         (if (> a b)
