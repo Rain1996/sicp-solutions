@@ -1,9 +1,11 @@
+; Recursive implementation
 (define (accumulate combiner null_value term a next b)
     (if (> a b)
         null_value
         (combiner (term a)
                   (accumulate combiner null_value term (next a) next b))))
 
+; Iterative implementation
 (define (accumulate_iter combiner null_value term a next b)
     (define (iter a result)
         (if (> a b)
