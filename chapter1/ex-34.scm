@@ -1,0 +1,1 @@
+; The object 2 is not applicable.
