@@ -1,3 +1,4 @@
+; f(f(f...(g(x))))
 (define (repeated_base f g n)
     (define (compose f g)
         (lambda (x) (f (g x))))
