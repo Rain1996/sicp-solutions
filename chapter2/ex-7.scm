@@ -1,5 +1,7 @@
 (define (make_interval a b)
-    (cons a b))
+    (if (> a b)
+        (cons b a)
+        (cons a b)))
 
 (define (lower_bound interval)
     (car interval))
