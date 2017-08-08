@@ -18,5 +18,7 @@
     (display "]"))
 
 ; test
-(define interval (make_interval 1 2))
-(print_interval interval)
+(define interval1 (make_interval 1 2))
+(define interval2 (make_interval 2 3))
+(print_interval interval1)
+(print_interval interval2)
