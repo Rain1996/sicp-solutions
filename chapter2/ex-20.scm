@@ -1,0 +1,21 @@
+(define (same_parity x . y)
+    (define (same_parity? a b)
+        (= (remainder (- b a) 2) 0))
+    (define (same_parity_help num_list)
+        (cond ((null? num_list) '())
+              ((same_parity? x (car num_list))
+                    (cons (car num_list) (same_parity_help (cdr num_list))))
+              (else (same_parity_help (cdr num_list)))))
+    (cons x (same_parity_help y)))
+
+
+; test
+; (1 3 5 7)
+; (2 4 6)
+; (1)
+(newline)
+(display (same_parity 1 2 3 4 5 6 7))
+(newline)
+(display (same_parity 2 3 4 5 6 7))
+(newline)
+(display (same_parity 1 2 4 6 8))
