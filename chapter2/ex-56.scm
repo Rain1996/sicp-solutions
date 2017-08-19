@@ -20,7 +20,7 @@
           (else (list '* m1 m2))))
 
 (define (make_exponentiation e1 e2)
-    (cond ((=number? e2 0) 1)
+    (cond ((or (=number? e2 0) (=number? e1 1)) 1)
           ((=number? e2 1) e1)
           ((and (number? e1) (number? e2)) (expt e1 e2))
           (else (list '** e1 e2))))
