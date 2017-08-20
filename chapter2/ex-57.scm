@@ -38,7 +38,7 @@
 (define (multiplicand p)
     (if (null? (cdddr p))
         (caddr p)
-        (cons '+ (cddr p))))
+        (cons '* (cddr p))))
 
 (define (exponentiation? x)
     (and (pair? x) (eq? (car x) '**)))
@@ -67,3 +67,6 @@
           (else
             (error "unknown expression type -- DERIV" exp))))
 
+; test
+(newline)
+(display (deriv '(* x y (+ x 3)) 'x))
