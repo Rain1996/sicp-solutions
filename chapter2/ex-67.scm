@@ -53,4 +53,5 @@
 (define sample_message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
 
 (newline)
+; (A D A B B C A)
 (display (decode sample_message sample_tree))
