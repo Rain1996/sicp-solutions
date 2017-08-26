@@ -80,11 +80,21 @@
                   (make_code_tree (car leaf_of_set)
                                   result))))
 
-    (iter (cddr leaf_set)
-          (make_code_tree (car leaf_set)
-                          (cadr leaf_set))))
+    (cond ((= 0 (length leaf_set)) '())
+          ((= 1 (length leaf_set)) (car leaf_set))
+          (else (iter (cddr leaf_set)
+                      (make_code_tree (car leaf_set)
+                                      (cadr leaf_set))))))
 
 ; test
-(define pairs '((H 9) (A 4) (B 2) (C 1) (D 1)))
+(define pairs1 '((H 9) (A 4) (B 2) (C 1) (D 1)))
 (newline)
-(display (generate_huffman_tree pairs))
+(display (generate_huffman_tree pairs1))
+
+(define pairs2 '())
+(newline)
+(display (generate_huffman_tree pairs2))
+
+(define pairs3 '((H 9)))
+(newline)
+(display (generate_huffman_tree pairs3))
