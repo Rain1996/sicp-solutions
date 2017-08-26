@@ -66,28 +66,17 @@
 (define (generate_huffman_tree pairs)
     (successive_merge (make_leaf_set pairs)))
 
-(define (successive_merge leaf_set)
-    (if (null? (cddr leaf_set))
-        (make_code_tree (car leaf_set) (cadr leaf_set))
-        (make_code_tree (car leaf_set)
-)))
 
 (define (successive_merge leaf_set)
-    (define (iter leaf_of_set result)
-        (if (null? leaf_of_set)
-            result
-            (iter (cdr leaf_of_set)
-                  (make_code_tree (car leaf_of_set)
-                                  result))))
-
     (cond ((= 0 (length leaf_set)) '())
           ((= 1 (length leaf_set)) (car leaf_set))
-          (else (iter (cddr leaf_set)
-                      (make_code_tree (car leaf_set)
-                                      (cadr leaf_set))))))
+          (else (successive_merge
+                    (adjoin_set (make_code_tree (car leaf_set)
+                                                (cadr leaf_set)) 
+                                (cddr leaf_set))))))
 
 ; test
-(define pairs1 '((H 9) (A 4) (B 2) (C 1) (D 1)))
+(define pairs1 '((H 7) (A 4) (B 2) (C 1) (D 1)))
 (newline)
 (display (generate_huffman_tree pairs1))
 
