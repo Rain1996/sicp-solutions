@@ -1,0 +1,27 @@
+(define (make_monitored proc)
+    (let ((times 0))
+        (lambda (message)
+            (cond ((eq? message 'how_many_calls?)
+                        times)
+                  ((eq? message 'reset_count)
+                        (set! times 0)
+                        times)
+                  (else
+                        (set! times (+ times 1))
+                        (proc message))))))
+
+; test
+(define s (make_monitored sqrt))
+
+(newline)
+(display (s 100))
+(newline)
+(display (s 'how_many_calls?))
+(newline)
+(display (s 9))
+(newline)
+(display (s 'how_many_calls?))
+(newline)
+(display (s 'reset_count))
+(newline)
+(display (s 'how_many_calls?))
