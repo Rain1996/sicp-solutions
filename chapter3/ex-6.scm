@@ -1,0 +1,6 @@
+(define (rand message)
+    (define x random_init)
+    (cond ((eq? message 'generate)
+            ((set! x (rand_update x)) x))
+          ((eq? message 'reset)
+            (lambda (value) (set! x value) x))))
