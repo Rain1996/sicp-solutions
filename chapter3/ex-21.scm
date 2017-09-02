@@ -18,7 +18,7 @@
 
 (define (front_queue queue)
     (if (empty_queue? queue)
-        (error "FROM called with an empty queue" queue)
+        (error "FRONT called with an empty queue" queue)
         (car (front_ptr queue))))
 
 (define (insert_queue! queue item)
