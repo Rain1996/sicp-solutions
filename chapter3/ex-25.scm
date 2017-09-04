@@ -1,5 +1,7 @@
 (define (make_table)
     (let ((local_table (list '*table*)))
+
+        ; 对于数值类型，在误差允许范围内认为相等
         (define (same_key? key1 key2)
             (define (close_enough? a b tolerance)
                 (< (abs (- a b)) tolerance))
@@ -7,7 +9,8 @@
                 (if (and (number? key1) (number? key2))
                     (close_enough? key1 key2 tolerance)
                     (equal? key1 key2))))
-
+        
+        ; 查看该表格里是否有以 key 作为关键码的记录
         (define (assoc key records)
             (cond ((null? records) False)
                   ((same_key? key (caar records)) (car records))
@@ -23,12 +26,15 @@
                         False)))
             (lookup_helper key_list local_table))
 
-        (define (create_table key_list value)
-            (if (null? (cdr key_list))
-                (cons (car key_list) value)
-                (list (car key_list) (create_table (cdr key_list) value))))
-
         (define (insert! key_list value)
+            
+            ; 辅助函数, 用于生成表格
+            (define (create_table key_list value)
+                (if (null? (cdr key_list))
+                    (cons (car key_list) value)
+                    (list (car key_list) (create_table (cdr key_list) value))))
+            
+            ; 辅助函数
             (define (insert_helper key_list table)
                 (let ((record (assoc (car key_list) (cdr table))))
                     (if record
