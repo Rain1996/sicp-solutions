@@ -126,4 +126,12 @@
 (newline)
 (display ((operation_table 'lookup_proc) '(four a c e)))
 
+((operation_table 'insert_proc) '(math +) 42)
+(newline)
+(display ((operation_table 'lookup_proc) '(math +)))
+
+((operation_table 'insert_proc) '(three a b) 99)
+(newline)
+(display ((operation_table 'lookup_proc) '(three a b)))
+
 (operation_table 'table)
