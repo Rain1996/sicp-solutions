@@ -8,3 +8,5 @@
         (or_gate c d e)
         (inverter e output)
         'ok))
+
+; or_gate_delay = 3 * inverter_delay + and_gate_delay
