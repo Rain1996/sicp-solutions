@@ -1,0 +1,7 @@
+(define (average_convert a b c)
+    (let ((sum (make_connector)
+          (count (make_connector))))
+        (adder a b sum)
+        (multiplier c count sum)
+        (constant 2 count)
+        'ok))
