@@ -20,12 +20,12 @@
 
 ; let expression
 (define (let? exp) (tagged-list? exp 'let))
-(define (let-variables exp) (map car (cadr exp)))
-(define (let-value exp) (map cadr (cadr exp)))
+(define (let-parameters exp) (map car (cadr exp)))
+(define (let-values exp) (map cadr (cadr exp)))
 (define (let-body exp) (cddr exp))
 
 ; 因为operands的实现是用cdr,所以这里用cons组合
 (define (let->combinaion exp)
-    (cons (make-lambda (let-variables exp)
+    (cons (make-lambda (let-parameters exp)
                        (let-body exp))
-          (let-value exp)))
+          (let-values exp)))
