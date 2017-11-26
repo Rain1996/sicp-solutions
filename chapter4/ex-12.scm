@@ -38,4 +38,5 @@
     (define check false)
     (define error-info "")
     (define (match-proc vals val) (set-car! vals val))
-    (define (not-match-proc env) (add-binding-to-frame! var val (first-frame env)))
+    (define (not-match-proc env) (add-binding-to-frame! var val (first-frame env))
+    (env-loop env match-proc not-match-proc check error-info))
