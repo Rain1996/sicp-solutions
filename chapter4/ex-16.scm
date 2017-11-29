@@ -17,17 +17,30 @@
 ; b)
 ; let 表达式 (let ((<var1> <exp1>) ... (<varn> <expn>)) <body>)
 (define (scan-out-defines procedure-body)
-    (define (scan-out body defines not_defines)
+    (define (add-defines exp defines)
+        (cons (cons (definition-variable exp) '*unassigned*) defines))
+    (define (add-not-defines exp not-defines)
+        (cons exp not-defines))
+    (define (add-sets exp sets)
+        (cons (list 'set! (definition-variable exp) (definition-value exp)) sets))
+    (define (to-let defines not-defines sets)
+        (cons 'let (cons defines (append sets not-defines))))
+    (define (scan-out body defines not-defines sets)
         (if (null? body)
-            (list ('let (reverse defines) (reverse not_defines))) ; 转为 let 表达式
+            (to-let (reverse defines)
+                    (resversr not-defines)
+                    (revers sets))                              ; 转为 let 表达式
             (let ((first (car body))
                   (rest (cdr body)))
                 (if (definition? first)
-                    (set! defines (cons (cons (definition-variable first)
-                                              (definition-value first))
-                                        defines))       ; 如果是定义式，则修改defines
-                    (set! not_defines (cons first not_defines)))    ; 非定义式，修改not_defines
-                (scan-out rest defines not_defines)))))
+                    (scan-out rest (add-defines first defines)
+                                   not-defines
+                                   (add-sets first sets))       ; 如果是定义式，则修改defines 和 sets
+                    (scan-out rest
+                              defines
+                              (add-not-defines first not-defines)
+                              sets)))))                         ; 非定义式，修改not-defines
+    (scan-out procedure-body '() '() '()))
 
 ; c)
 ; 安装在 make-procedure 比较好。
